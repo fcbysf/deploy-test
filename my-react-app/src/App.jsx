@@ -3,6 +3,35 @@ import { useEffect } from "react";
 import "./App.css";
 
 function App() {
+  function getCookie(name) {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return decodeURIComponent(parts.pop().split(';').shift());
+  return null;
+}
+
+const submit = async (e) => {
+  e.preventDefault();
+  const csrfToken = getCookie('XSRF-TOKEN');
+
+  const res = await fetch('https://deploy-test-production-2c10.up.railway.app/login', {
+    method: 'POST',
+    credentials: 'include',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'X-XSRF-TOKEN': csrfToken,  // ← MUST send this
+    },
+    body: JSON.stringify({
+      email: 'test@example.com',
+      password: 'password',
+    }),
+  });
+
+  const data = await res.json();
+  console.log(data);
+};
+
   useEffect(()=>{
     fetch('https://deploy-test-production-2c10.up.railway.app/sanctum/csrf-cookie',{
       credentials: 'include',
@@ -10,16 +39,7 @@ function App() {
     .then(response => response.text())
     .then(data => console.log(document.cookie));
   },[])
-  const submit = (e) => {
-    e.preventDefault();
-    fetch('https://deploy-test-production-2c10.up.railway.app/login',{
-      method: 'POST',
-      credentials: 'include',
-      headers: {
-        'accept': 'application/json',
-        'Content-Type': 'application/json',
-      },}
-    )}
+
         console.log(document.cookie);
 
   return (
