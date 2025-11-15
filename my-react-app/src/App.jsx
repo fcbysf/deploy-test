@@ -16,6 +16,7 @@ function App() {
       method: 'POST',
       credentials: 'include',
       headers: {
+        'accept': 'application/json',
         'Content-Type': 'application/json',
       },}
     )}
