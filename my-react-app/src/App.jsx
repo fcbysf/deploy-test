@@ -8,7 +8,7 @@ function App() {
       credentials: 'include',
     })
     .then(response => response.text())
-    .then(data => console.log(data));
+    .then(data => console.log(document.cookie));
   },[])
   const submit = (e) => {
     e.preventDefault();
@@ -20,7 +20,7 @@ function App() {
         'Content-Type': 'application/json',
       },}
     )}
-        
+        console.log(document.cookie);
 
   return (
     <>
