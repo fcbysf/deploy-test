@@ -14,7 +14,7 @@ const submit = async (e) => {
   e.preventDefault();
   const csrfToken = getCookie('XSRF-TOKEN');
 
-  const res = await fetch('https://deploy-test-production-2c10.up.railway.app/login', {
+  const res = await fetch('/api/login', {
     method: 'POST',
     credentials: 'include',
     headers: {
