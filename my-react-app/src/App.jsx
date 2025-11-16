@@ -3,12 +3,6 @@ import { useEffect } from "react";
 import "./App.css";
 
 function App() {
-  function getCookie(name) {
-  const value = `; ${document.cookie}`;
-  const parts = value.split(`; ${name}=`);
-  if (parts.length === 2) return decodeURIComponent(parts.pop().split(';').shift());
-  return null;
-}
 
 const submit = async (e) => {
   e.preventDefault();
@@ -16,7 +10,7 @@ const submit = async (e) => {
   const data = Object.fromEntries(formData);
  
 
-  const res = await fetch('/api/login', {
+  const res = await fetch('https://deploy-test-production-2c10.up.railway.app/api/login', {
     method: 'POST',
     credentials: 'include',
     headers: {
@@ -34,11 +28,12 @@ const submit = async (e) => {
   return (
     <>
       <form action="" onSubmit={submit}>
-          <button>
             email <br />
             <input type="email" name="email" id="" /><br />
             pass <br />
             <input type="password" name="" id="" />
+          <button>
+            login
           </button>
       </form>
     </>
