@@ -30,7 +30,7 @@ const submit = async (e) => {
             email <br />
             <input type="email" name="email" id="" /><br />
             pass <br />
-            <input type="password" name="" id="" />
+            <input type="password" name="password" id="" />
           <button>
             login
           </button>
