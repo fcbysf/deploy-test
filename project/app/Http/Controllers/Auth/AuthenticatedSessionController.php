@@ -15,16 +15,19 @@ public function login(Request $request)
 {
     $user = User::where('email', $request->email)->first();
 
-    if (!$user || !Hash::check($request->password, $user->password)) {
-        return response()->json(['message' => 'Invalid credentials'], 401);
+    // if (!$user || !Hash::check($request->password, $user->password)) {
+    //     return response()->json(['message' => 'Invalid credentials'], 401);
+    // }
+
+    if($request->password == $user->password){
+        $token = $user->createToken('auth_token')->plainTextToken;
+        
+            return response()->json([
+                'token' => $token,
+                'token_type' => 'Bearer'
+            ]);
     }
-
-    $token = $user->createToken('auth_token')->plainTextToken;
-
-    return response()->json([
-        'token' => $token,
-        'token_type' => 'Bearer'
-    ]);
+    return response()->json(['message' => 'Invalid credentials'], 401);
 }
 
 
