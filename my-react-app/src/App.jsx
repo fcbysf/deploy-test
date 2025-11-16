@@ -12,7 +12,6 @@ const submit = async (e) => {
 
   const res = await fetch('https://deploy-test-production-2c10.up.railway.app/api/login', {
     method: 'POST',
-    credentials: 'include',
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
