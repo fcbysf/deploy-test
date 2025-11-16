@@ -11,7 +11,7 @@ use App\Models\User;
 class AuthenticatedSessionController extends Controller
 {
 
-public function store(Request $request)
+public function login(Request $request)
 {
     $user = User::where('email', $request->email)->first();
 
