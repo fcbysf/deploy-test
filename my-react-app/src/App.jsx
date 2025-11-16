@@ -12,7 +12,9 @@ function App() {
 
 const submit = async (e) => {
   e.preventDefault();
-  const csrfToken = getCookie('XSRF-TOKEN');
+  const formData = new FormData(e.target);
+  const data = Object.fromEntries(formData);
+ 
 
   const res = await fetch('/api/login', {
     method: 'POST',
@@ -20,33 +22,23 @@ const submit = async (e) => {
     headers: {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
-      'X-XSRF-TOKEN': csrfToken,  // ← MUST send this
     },
-    body: JSON.stringify({
-      email: 'test@example.com',
-      password: 'password',
-    }),
+    body: JSON.stringify(data),
   });
 
-  const data = await res.json();
-  console.log(data);
+  const Resdata = await res.json();
+  console.log(Resdata);
 };
 
-  useEffect(()=>{
-    fetch('https://deploy-test-production-2c10.up.railway.app/sanctum/csrf-cookie',{
-      credentials: 'include',
-    })
-    .then(response => response.text())
-    .then(data => console.log(document.cookie));
-  },[])
-
-        console.log(document.cookie);
 
   return (
     <>
       <form action="" onSubmit={submit}>
           <button>
-            Login
+            email <br />
+            <input type="email" name="email" id="" /><br />
+            pass <br />
+            <input type="password" name="" id="" />
           </button>
       </form>
     </>
